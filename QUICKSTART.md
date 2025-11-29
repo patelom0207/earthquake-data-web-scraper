@@ -16,6 +16,10 @@ Get up and running with the Earthquake Data Visualization Platform in minutes!
 # Navigate to backend
 cd backend
 
+# Create and activate virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
 # Install Python dependencies
 pip install -r requirements.txt
 
@@ -75,9 +79,15 @@ The frontend will start at `http://localhost:5173`
 ## Common Issues
 
 ### Backend won't start
+- Make sure you activated the virtual environment: `source venv/bin/activate`
 - Make sure you're in the `backend/app` directory
 - Check that port 8000 is not already in use
-- Verify Python 3.8+ is installed: `python --version`
+- Verify Python 3.8+ is installed: `python3 --version`
+
+### pip command not found or "externally-managed-environment" error
+- Use a virtual environment (see Step 1 above)
+- On macOS with Homebrew Python, you MUST use a virtual environment
+- Try `python3 -m pip` instead of just `pip`
 
 ### Frontend shows API errors
 - Ensure the backend is running at `http://localhost:8000`
