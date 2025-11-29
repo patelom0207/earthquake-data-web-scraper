@@ -23,7 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-db = EarthquakeDatabase(db_path="data/earthquakes.db")
+db = EarthquakeDatabase(db_path="../data/earthquakes.db")
 
 
 class EarthquakeResponse(BaseModel):
@@ -203,7 +203,7 @@ async def clear_old_data(
 if __name__ == "__main__":
     import uvicorn
 
-    os.makedirs("data", exist_ok=True)
+    os.makedirs("../data", exist_ok=True)
 
     uvicorn.run(
         "main:app",
