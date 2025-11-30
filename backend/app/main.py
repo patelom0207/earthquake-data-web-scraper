@@ -200,6 +200,20 @@ async def clear_old_data(
         raise HTTPException(status_code=500, detail=f"Error clearing old data: {str(e)}")
 
 
+@app.delete("/earthquakes/all")
+async def clear_all_data():
+    """Clear all earthquake data from database."""
+    try:
+        deleted = db.clear_all_data()
+        return {
+            "success": True,
+            "deleted_count": deleted,
+            "message": "All earthquake data has been cleared"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error clearing all data: {str(e)}")
+
+
 if __name__ == "__main__":
     import uvicorn
 

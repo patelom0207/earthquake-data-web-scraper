@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-export default function FilterPanel({ onFilterChange, onScrape, isLoading }) {
+export default function FilterPanel({ onFilterChange, onScrape, onClearData, isLoading }) {
   const [filters, setFilters] = useState({
     minMagnitude: '',
     maxMagnitude: '',
@@ -31,11 +31,17 @@ export default function FilterPanel({ onFilterChange, onScrape, isLoading }) {
     onScrape(timeRange);
   };
 
+  const handleClearData = () => {
+    if (window.confirm('Are you sure you want to clear all earthquake data? This cannot be undone.')) {
+      onClearData();
+    }
+  };
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
       <h2 className="text-xl font-bold mb-4">Data Controls</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Time Range
@@ -59,6 +65,16 @@ export default function FilterPanel({ onFilterChange, onScrape, isLoading }) {
             className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
           >
             {isLoading ? 'Scraping...' : 'Scrape New Data'}
+          </button>
+        </div>
+
+        <div className="flex items-end">
+          <button
+            onClick={handleClearData}
+            disabled={isLoading}
+            className="w-full px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+          >
+            Clear All Data
           </button>
         </div>
       </div>

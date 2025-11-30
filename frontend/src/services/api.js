@@ -48,6 +48,11 @@ export const earthquakeAPI = {
     return response.data;
   },
 
+  clearAllData: async () => {
+    const response = await api.delete('/earthquakes/all');
+    return response.data;
+  },
+
   healthCheck: async () => {
     const response = await api.get('/health');
     return response.data;

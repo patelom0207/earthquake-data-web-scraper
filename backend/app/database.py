@@ -229,3 +229,16 @@ class EarthquakeDatabase:
         conn.close()
 
         return deleted
+
+    def clear_all_data(self):
+        """Clear all earthquake data from database."""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        cursor.execute('DELETE FROM earthquakes')
+        deleted = cursor.rowcount
+
+        conn.commit()
+        conn.close()
+
+        return deleted

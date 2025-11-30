@@ -62,6 +62,22 @@ function App() {
     }
   };
 
+  const handleClearData = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const result = await earthquakeAPI.clearAllData();
+      await loadEarthquakes();
+      await loadStatistics();
+      alert(`Successfully cleared ${result.deleted_count} earthquake records!`);
+    } catch (err) {
+      setError('Failed to clear data. Make sure the backend server is running.');
+      console.error('Error clearing data:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleFilterChange = (filters) => {
     let filtered = [...earthquakes];
 
@@ -102,6 +118,7 @@ function App() {
         <FilterPanel
           onFilterChange={handleFilterChange}
           onScrape={handleScrape}
+          onClearData={handleClearData}
           isLoading={isLoading}
         />
 
